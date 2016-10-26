@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <h1>About USSRAEL</h1>
+            <p>This is sa actually be a bad idea. Django will use the first static file it
+                finds whose name matches, and if you had a static file with the same name
+                in a different application.</p>
+            <p>Django would be unable to distinguish between them. We need to be able to
+                point Django at the right one, and the easiest way to ensure this is by
+                namespacing them. That is, by putting those static files inside another
+                directory named for the application itself.</p>
+        </div>
+    </div>
+{% endblock %}

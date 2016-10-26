@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block head_title %}Hey goy|{{ block.super }}{% endblock %}
+
+<style>
+    {% block style %}
+        .navbar-static-top {
+            margin-bottom: 0px;
+        }
+        .jumbotron {
+            background-color: #b77d00;
+            color: #d1d1d1;
+        }
+    {% endblock %}
+</style>
+
+{% block jumbotron %}
+    {% if not request.user.is_authenticated %}
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div align="center" class="col-md-6 col-sm-12 col-xs-12 pull-right">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/ckVYO9oI8vc" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="col-md-6 col-sm-0">
+                        <h1 align="center">Pay debts!</h1>
+                        <p class="lead text-align-center">The Israel Institute works in partnership with leading academic, research and cultural institutions to enhance knowledge and study of modern Israel in the United States and around the world. Founded in 2012 as an independent, nonpartisan organization based in Washington, DC, the Institute supports scholarship, research and exchanges to build a multi-faceted field of Israel Studies and expand opportunities to explore the diversity and complexity of contemporary Israel.</p>
+                        <p>
+                            <a class="btn btn-lg btn-primary" href=""
+                               role="button">Iojn us! &raquo;</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <h1 align="center">You have true side curls![user]</h1>
+        {% if queryset %}
+            <h2>Welcome rabii![admin]<br />This is true shlomo list:</h2>
+            <table class="table">
+            {% for inst in queryset %}
+                <tr><td>{{ forloop.counter }}</td><td>{{ inst }}</td>
+                    <td>{{ inst.full_name }}</td><td>{{ inst.donation }}</td>
+                    <td>{{ inst.doner_kebab }}</td></tr>
+            {% endfor %}
+            </table>
+        {% endif %}
+    {% else %}
+        <div class="row">
+            <div class="col-xs-4 pull-right">
+                <p class="lead text-align-center">{{ title }}</p>
+                <form method="POST" action="">{% csrf_token %}
+                    {{ form|crispy }}
+                    <input class="btn btn-primary" type="submit" value="Sign Up" />
+                </form><br /><br />
+            </div>
+            <div class="col-sm-4">
+                <img src="{% static 'img/negro.jpg' %}" class="img-responsive" />
+            </div>
+            <div class="col-sm-4">
+                <p class="lead text-align-center">Unless the Lord builds the house,
+                    Im HaShem Lo Yivneh Bayit
+                    The builders labor in vain.
+                    Shav Amlu Bonav Bo
+                    Unless the Lord watches over the city. <br /><br />
+                <span class="fa-stack fa-lg">
+                    <i class="fa fa-spinner fa-stack-2x" aria-hidden="true"></i>
+                    <i class="fa fa-usd fa-stack-1x" aria-hidden="true"></i>
+                </span>
+                </p>
+
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
